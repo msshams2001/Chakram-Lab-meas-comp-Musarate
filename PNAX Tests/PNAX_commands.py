@@ -9,52 +9,45 @@ class PNAX():
         
         <ch> Any existing channel number; if unspecified, value is set to 1.
 
-<n>
+        <n> Pulse generator number. Choose from 0 to 4. 0 is the generator that pulses the ADC.
 
-Pulse generator number. Choose from 0 to 4.
+        <value> Boolean
 
-0 is the generator that pulses the ADC.
+                ON (or 1) - turns pulse output ON.
 
-<value>
+                OFF (or 0) - turns pulse output OFF.
 
-Boolean
+        <name>   Optional. String name of the pulse generator.
 
-ON (or 1) - turns pulse output ON.
+                Required for use with external pulse generators.
 
-OFF (or 0) - turns pulse output OFF.
+        Use SENSe:PULSe:CAT? to return the names of configured pulse generators.
 
-<name>
+    If specified, <n> is ignored.
 
-Optional. String name of the pulse generator.
+    If unspecified, <n> is required for internal pulse generators.
 
-Required for use with external pulse generators.
+    Examples
 
-Use SENSe:PULSe:CAT? to return the names of configured pulse generators.
+    SENS:PULS1 1
 
-If specified, <n> is ignored.
+    SENS:PULS 1, "My81110"
 
-If unspecified, <n> is required for internal pulse generators.
+    Query Syntax
 
-Examples
+    SENSe<ch>:PULSe[:STATe]? [<name>]
 
-SENS:PULS1 1
+    Return Type
 
-SENS:PULS 1, "My81110"
+    Boolean
 
-Query Syntax
+    Default
 
-SENSe<ch>:PULSe[:STATe]? [<name>]
-
-Return Type
-
-Boolean
-
-Default
-
-OFF
+    OFF
         """
         
         query = "SENS%d:PULS%d[:STAT] %d,%s" %(ch,n,value,name)
+        return self.write(query)
 
 
     def set_pulse_delay(self, ch, n, value, name = None):
