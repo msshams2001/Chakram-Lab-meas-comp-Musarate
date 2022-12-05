@@ -1309,3 +1309,9 @@ class PnaxPulseExperiment(Experiment):
 
         print('\nData file saved:')
         print(self.fname)
+
+    #RF switch signals 
+
+    def switch_pulses(self):
+         
+    
